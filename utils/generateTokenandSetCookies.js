@@ -6,7 +6,7 @@ const token = jwt.sign({userId,email},process.env.JWT_SECRET,{
 })
 res.cookie("token",token,{
    httpOnly:true, //by setting this prevent attack called xss xss-crosscripting attack
-   secure:true,
+   secure:process.env.NODE_ENV === "production",
    sameSite:"strict",
    maxAge:7*24*60*60*1000
 })
