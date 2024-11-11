@@ -26,7 +26,9 @@ app.use("/api/logs",logRouters)
 app.use("/api/review",reviewRoutes)
 app.use("/api/admin",adminRoutes)
 
-
+app.get('/',(req,res)=> {
+    res.send('<p>Success </p>')
+})
 app.listen(PORT,()=> {
     connectToDb()
     console.log("server listening on port ",PORT);
