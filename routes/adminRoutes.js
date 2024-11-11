@@ -7,6 +7,7 @@ const router = express.Router()
 // auth
 router.post('/register',adminregister)
 router.post('/login',adminlogin)
+
 router.get('/check',adminjwtmiddleware,checkAuth)
 router.post('/logout',adminlogout)
 
