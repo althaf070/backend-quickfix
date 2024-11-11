@@ -54,7 +54,7 @@ export const adminlogin = async (req, res) => {
       return res.status(406).json("Invalid email or password");
     }
 
-  generateAdminTokenandsetCookie(res,existingUser._id)
+   generateAdminTokenandsetCookie(res,existingUser._id)
   
     res.status(200).json({success:true,message:"Login Success", admin: existingUser });
   } catch (error) {

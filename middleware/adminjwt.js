@@ -10,10 +10,8 @@ const adminjwtmiddleware = async(req, res, next) => {
   }
 
   try {
-    // Verify the token using JWT_SECRET
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     
-    // If the decoded token is invalid, respond with an error
     if (!decoded) {
       return res.status(401).json({ success: false, message: "Unauthorized - Invalid token provided" });
     }
@@ -21,10 +19,10 @@ const adminjwtmiddleware = async(req, res, next) => {
     if (!admin) {
       return res.status(404).json({ success: false, message: "admin not found" });
     }
-    // Add the adminId from the decoded token to the request object
-    req.adminId = decoded.adminId;
 
-    // Call the next middleware function
+    req.adminId = decoded.adminId;
+    console.log(req.adminId,"admin");
+    
     next();
   } catch (error) {
     // Log the error for debugging
