@@ -16,6 +16,8 @@ const PORT = process.env.PORT || 3000
 const allowedOrigins = [
     'http://localhost:5173',
     'https://provider-frontend.vercel.app',
+    'https://quickfiix.vercel.app',
+    'https://quickfixadmin.vercel.app'
   ];
   
   // Configure CORS with dynamic origin checking
