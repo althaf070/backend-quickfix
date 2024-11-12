@@ -176,7 +176,7 @@ export const getServiceProviderDashboard = async (req, res) => {
         appointments: {
           total: totalAppointmentsCount,
           pending: pendingAppointmentsCount,
-          ongoid:committedAppointmentsCount,
+          ongoing:committedAppointmentsCount,
           completed: completedAppointmentsCount
         },
         reviews: providerReviewsCount
