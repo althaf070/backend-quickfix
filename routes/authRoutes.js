@@ -22,7 +22,7 @@ router.post("/logout",logout)
 router.get("/provider/check",verifyProviderToken,checkProviderAuth)
 
 router.post("/provider/signup",providerSignin)
-router.patch("/provider/profile",multerConfig.single('profilepic'),profilepicUpload)
+router.patch("/provider/profile",verifyProviderToken,multerConfig.single('profilepic'),profilepicUpload)
 
 router.post("/provider/login",providerLogin)
 router.post("/provider/logout",providerlogout)
