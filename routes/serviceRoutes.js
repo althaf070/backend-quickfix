@@ -2,6 +2,7 @@ import express from 'express';
 import { createService, deleteProviderService, editProviderService, getAllServices, getProviderServices, getServiceById, getServiceByName, getServiceWithOutCurrentProvider, getUsedServicesWithProviders  } from '../controllers/serviceController.js';
 import { verifyProviderToken } from '../middleware/verifyProviderToken.js';
 import { verifyToken } from '../middleware/verifytoken.js';
+import { getServiceProviderDashboard } from '../controllers/serviceProviderController.js';
 
 const router = express.Router();
 // for users
@@ -15,6 +16,8 @@ router.get('/:sid',verifyToken,getServiceById)
 router.get('/providerexception/:pid',verifyProviderToken,getServiceWithOutCurrentProvider)
 
 router.get('/providerservices/:pid',verifyProviderToken,getProviderServices)
+
+router.get('/provider/dashboard/:providerId',verifyProviderToken,getServiceProviderDashboard)
 
 router.post('/create',verifyProviderToken,createService)
 router.put('/edit/:sid',verifyProviderToken,editProviderService)

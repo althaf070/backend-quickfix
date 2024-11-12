@@ -4,6 +4,7 @@ import { generateProviderTokenandsetCookie } from "../utils/generateTokenandSetC
 import { Service } from "../models/serviceSchema.js";
 import { Review } from "../models/reviewsSchema.js";
 import { Appointment } from "../models/appointmentSchema.js";
+import {Log} from '../models/logSchema.js'
 
 // signin
 export const providerSignin = async(req, res) => {
@@ -146,3 +147,44 @@ export const deleteProvider =async(req, res) => {
     res.status(500).json({ success: false, message: "Error deteing provider" });
   }
 }
+
+// get dashboard data
+export const getServiceProviderDashboard = async (req, res) => {
+  try {
+    const { providerId } = req.params; // assuming providerId is passed as a route parameter
+
+    const [
+      providerServicesCount,
+      totalAppointmentsCount,
+      pendingAppointmentsCount,
+      completedAppointmentsCount,
+      providerReviewsCount
+    ] = await Promise.all([
+      Service.countDocuments({ providerId }),
+      Appointment.countDocuments({providers: providerId }), 
+      Appointment.countDocuments({ providers:providerId, status: "pending" }),
+      Log.countDocuments({providers:providerId, status: "paid"}),
+      Review.countDocuments({ providerId }) 
+    ]);
+
+    res.status(200).json({
+      success: true,
+      data: {
+        services: providerServicesCount,
+        appointments: {
+          total: totalAppointmentsCount,
+          pending: pendingAppointmentsCount,
+          completed: completedAppointmentsCount
+        },
+        reviews: providerReviewsCount
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching service provider dashboard data:", error);
+    res.status(500).json({
+      success: false,
+      message: "Error in getting service provider dashboard details",
+      error: error.message
+    });
+  }
+};
