@@ -158,12 +158,14 @@ export const getServiceProviderDashboard = async (req, res) => {
       totalAppointmentsCount,
       pendingAppointmentsCount,
       completedAppointmentsCount,
+      committedAppointmentsCount,
       providerReviewsCount
     ] = await Promise.all([
       Service.countDocuments({ providerId }),
       Appointment.countDocuments({providers: providerId }), 
       Appointment.countDocuments({ providers:providerId, status: "pending" }),
       Log.countDocuments({providers:providerId, status: "paid"}),
+      Appointment.countDocuments({providers:providerId, status: "confirmed"}),
       Review.countDocuments({ providerId }) 
     ]);
 
@@ -174,6 +176,7 @@ export const getServiceProviderDashboard = async (req, res) => {
         appointments: {
           total: totalAppointmentsCount,
           pending: pendingAppointmentsCount,
+          ongoid:committedAppointmentsCount,
           completed: completedAppointmentsCount
         },
         reviews: providerReviewsCount
