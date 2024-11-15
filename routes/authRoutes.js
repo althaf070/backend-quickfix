@@ -13,10 +13,6 @@ router.post("/signup",signup)
 router.post("/login",login)
 router.post("/logout",logout)
 
-// router.post("/verify-email",verifyEmail)
-// router.post("/forgot-password",forgotpassword)
-// router.post("/reset-password/:token",resetpassword)
-
 
 // service provider authentication
 router.get("/provider/check",verifyProviderToken,checkProviderAuth)

@@ -22,7 +22,8 @@ res.cookie("providertoken",providertoken,{
    httpOnly:true, //by setting this prevent attack called xss xss-crosscripting attack
    secure:process.env.NODE_ENV === "production",
    sameSite: 'None',
-   maxAge:7*24*60*60*1000
+   maxAge:7*24*60*60*1000,
+   path: '/',
 })
 return providertoken
 }

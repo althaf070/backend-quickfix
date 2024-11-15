@@ -86,11 +86,12 @@ export const providerLogin = async(req, res) => {
   export const providerlogout = async(req, res) => {
     res.clearCookie('providertoken', {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production', // Ensure this matches your environment
-      sameSite: 'None', // Match with the cookie setting
+      secure: process.env.NODE_ENV === 'production', 
+      sameSite: 'None', 
+      path:'/'
     });
   };
-// checking provider is logged in
+
   export const checkProviderAuth = async(req, res) => {
 	try {
 		const user = await Providers.findById(req.providerId).select("-password");
