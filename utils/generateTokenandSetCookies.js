@@ -23,7 +23,6 @@ res.cookie("providertoken",providertoken,{
    secure:process.env.NODE_ENV === "production",
    sameSite: 'None',
    maxAge:7*24*60*60*1000,
-   path: '/',
 })
 return providertoken
 }

@@ -88,7 +88,6 @@ export const providerLogin = async(req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production', 
       sameSite: 'None', 
-      path:'/'
     });
   };
 
