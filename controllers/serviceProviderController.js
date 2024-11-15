@@ -89,6 +89,7 @@ export const providerLogin = async(req, res) => {
       secure: process.env.NODE_ENV === 'production', 
       sameSite: 'None', 
     });
+    res.status(200).json({ success: true, message: "Logout successful" });
   };
 
   export const checkProviderAuth = async(req, res) => {
