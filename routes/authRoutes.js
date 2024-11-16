@@ -21,6 +21,6 @@ router.post("/provider/signup",providerSignin)
 router.patch("/provider/profile",verifyProviderToken,multerConfig.single('profilepic'),profilepicUpload)
 
 router.post("/provider/login",providerLogin)
-router.post("/provider/logout",providerlogout)
+router.post("/provider/logout",verifyProviderToken,providerlogout)
 // admin authentication
 export default router
