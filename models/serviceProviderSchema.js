@@ -52,7 +52,12 @@ const serviceProviderSchema =new mongoose.Schema({
   totalEarning:{
     type:Number,
     default:0
-  }
+  },
+  averageRating: {
+    type: Number,
+    default: 0,
+    max: 5  // Maximum rating value
+},
 },{timestamps:true})
 
 export const Providers = mongoose.model('Providers', serviceProviderSchema)
