@@ -186,7 +186,7 @@ export const getProviderAllReviews = async(req, res) => {
         // Optionally, remove the review from user and provider documents
         await users.updateOne({ _id: review.userId }, { $pull: { reviews: rid } });
         await Providers.updateOne({ _id: review.providerId }, { $pull: { reviews: rid } });
-    
+        await calculateAverageRating(review.providerId)
         res.status(200).json({
           success: true,
           message: 'Review deleted successfully.',
