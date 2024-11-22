@@ -119,7 +119,7 @@ export const getProviderAppointments = async (req, res) => {
 // update status by provider
 export const updateAppointmentStatus = async (req, res) => {
     const { aid } = req.params;
-    const { status } = req.body;
+    const { status,price } = req.body;
 
     try {
         const appointment = await Appointment.findById(aid);
@@ -141,7 +141,10 @@ export const updateAppointmentStatus = async (req, res) => {
 
             await Providers.findByIdAndUpdate(
                 appointment.providers,
-                { $pull: { appointments: appointment._id } },
+                {   
+                    $inc: { totalEarning: Number(price) },
+                    $pull: { appointments: appointment._id } 
+                },
                 { new: true }
             );
 
@@ -153,6 +156,7 @@ export const updateAppointmentStatus = async (req, res) => {
                 },
                 { new: true }
             );
+            
             await Appointment.findByIdAndDelete(aid);
             return res.status(200).json({ success: true, message: "Appointment deleted as 'paid'.",appointment });
         }
